@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reto 1 — Objetos en la escena</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+    <a-scene>
+
+      <!-- CAJA — izquierda -->
+      <!-- position="x y z" : x=-2 (izquierda), y=1.5 (altura ojos), z=-4 (delante) -->
+      <a-box
+        position="-2 1.5 -4"
+        rotation="0 45 0"
+        width="1"
+        height="1"
+        depth="1"
+        color="#E24B4A">
+      </a-box>
+
+      <!-- ESFERA — centro -->
+      <a-sphere
+        position="0 1.5 -4"
+        radius="0.6"
+        color="#EF9F27">
+      </a-sphere>
+
+      <!-- CILINDRO — derecha -->
+      <a-cylinder
+        position="2 1 -4"
+        radius="0.4"
+        height="2"
+        color="#4CC3D9">
+      </a-cylinder>
+
+      <!-- TEXTO — flotando arriba -->
+      <a-text
+        value="Reto 1 completado"
+        position="-1.5 3 -4"
+        color="#ffffff"
+        width="4">
+      </a-text>
+
+      <!-- SUELO -->
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        color="#3a3a4a">
+      </a-plane>
+
+      <!-- CIELO -->
+      <a-sky color="#1a1a2e"></a-sky>
+
+    </a-scene>
+
+  </body>
+</html>
