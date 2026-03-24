@@ -30,7 +30,7 @@ Este repositorio es el camino que yo seguí para aprenderlo — reto a reto, sin
 ### ✅ Reto 0 — Arrancar algo
 El objetivo es únicamente completar el ciclo: escribir HTML → subir → ver en VR. Una caja, un suelo, un cielo. Diez líneas de código.
 
-📁 [`reto-00-arrancar/`](./reto-0/)
+📁 [`reto-00-arrancar/`](Reto-0)
 
 ---
 
