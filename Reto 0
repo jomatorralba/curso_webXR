@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reto 0 — Arrancar algo</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+    <a-scene>
+
+      <!-- Una caja azul delante de ti, a la altura de los ojos -->
+      <a-box position="0 1.5 -3" color="#4CC3D9"></a-box>
+
+      <!-- El suelo -->
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        color="#3a3a4a">
+      </a-plane>
+
+      <!-- El cielo -->
+      <a-sky color="#1a1a2e"></a-sky>
+
+    </a-scene>
+
+  </body>
+</html>
