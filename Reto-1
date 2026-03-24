@@ -9,8 +9,21 @@
 
     <a-scene>
 
-      <!-- CAJA — izquierda -->
-      <!-- position="x y z" : x=-2 (izquierda), y=1.5 (altura ojos), z=-4 (delante) -->
+      <!--
+        CAJA — colocada a la izquierda
+        ─────────────────────────────
+        position="-2 1.5 -4"
+          x = -2  →  2 metros a la izquierda
+          y =  1.5 →  a la altura de los ojos
+          z = -4   →  4 metros delante de ti (z negativo = delante)
+
+        rotation="0 45 0"
+          gira 45 grados sobre el eje Y (vertical)
+          es como girar un objeto mirando desde arriba
+
+        width / height / depth  →  tamaño en metros (1 = 1 metro)
+        color  →  color en hexadecimal, igual que en CSS
+      -->
       <a-box
         position="-2 1.5 -4"
         rotation="0 45 0"
@@ -20,14 +33,35 @@
         color="#E24B4A">
       </a-box>
 
-      <!-- ESFERA — centro -->
+      <!--
+        ESFERA — colocada en el centro
+        ───────────────────────────────
+        position="0 1.5 -4"
+          x = 0  →  justo en el centro (ni izquierda ni derecha)
+          y = 1.5 → a la altura de los ojos
+          z = -4  → 4 metros delante
+
+        radius  →  radio de la esfera en metros
+                   0.6 = esfera de 1.2 metros de diámetro
+      -->
       <a-sphere
         position="0 1.5 -4"
         radius="0.6"
         color="#EF9F27">
       </a-sphere>
 
-      <!-- CILINDRO — derecha -->
+      <!--
+        CILINDRO — colocado a la derecha
+        ─────────────────────────────────
+        position="2 1 -4"
+          x = 2  →  2 metros a la derecha
+          y = 1  →  un poco más bajo que los otros
+                    (porque height=2, el centro queda en y=1)
+          z = -4  → 4 metros delante
+
+        radius  →  grosor del cilindro (0.4 = bastante fino)
+        height  →  alto del cilindro en metros
+      -->
       <a-cylinder
         position="2 1 -4"
         radius="0.4"
@@ -35,7 +69,18 @@
         color="#4CC3D9">
       </a-cylinder>
 
-      <!-- TEXTO — flotando arriba -->
+      <!--
+        TEXTO — flotando por encima de los objetos
+        ───────────────────────────────────────────
+        value   →  el texto que se muestra
+        position="−1.5 3 −4"
+          x = -1.5  →  ligeramente a la izquierda para centrarlo visualmente
+          y =  3    →  por encima de los objetos (que están en y=1.5)
+          z = -4    →  a la misma profundidad que los objetos
+
+        width   →  ancho del bloque de texto en metros
+                   si el texto es largo, aumenta este valor
+      -->
       <a-text
         value="Reto 1 completado"
         position="-1.5 3 -4"
@@ -43,7 +88,17 @@
         width="4">
       </a-text>
 
-      <!-- SUELO -->
+      <!--
+        SUELO — un plano horizontal grande
+        ────────────────────────────────────
+        position="0 0 0"  →  en el origen, a ras del suelo
+
+        rotation="-90 0 0"
+          por defecto los planos son verticales (como una pared)
+          rotamos -90 grados en X para tumbarlo horizontalmente
+
+        width / height  →  tamaño del suelo en metros
+      -->
       <a-plane
         position="0 0 0"
         rotation="-90 0 0"
@@ -52,7 +107,12 @@
         color="#3a3a4a">
       </a-plane>
 
-      <!-- CIELO -->
+      <!--
+        CIELO — esfera gigante que rodea toda la escena
+        ─────────────────────────────────────────────────
+        color  →  el color del fondo/cielo
+                  puedes poner cualquier color hex
+      -->
       <a-sky color="#1a1a2e"></a-sky>
 
     </a-scene>
