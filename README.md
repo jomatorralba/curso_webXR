@@ -37,7 +37,7 @@ El objetivo es únicamente completar el ciclo: escribir HTML → subir → ver e
 ### ✅ Reto 1 — Poner objetos en la escena
 Entender el sistema de coordenadas X Y Z y colocar objetos en el espacio. Cajas, esferas, cilindros, texto. Todo con atributos HTML.
 
-📁 [`reto-01-objetos/`](./reto-01-objetos/)
+📁 [`reto-01-objetos/`](Reto-1)
 
 ---
 
