@@ -133,7 +133,7 @@ Proyecto final. Una galería, un puzzle o un quiz en VR combinando todo lo apren
 git clone https://github.com/jomatorralba/webxr-retos.git
 ```
 
-Abre la carpeta del reto que quieras, edita el `.html` y súbelo a tu hosting. Luego abre esa URL desde el **Meta Quest Browser** y pulsa **Enter VR**.
+Abre la carpeta del reto que quieras, edita el `.html`, cortalo, pegalo, haz lo que quieras, todos los retos tienen en código comentado para que lo entendais todo a la perfección, súbelo a tu hosting. Luego abre esa URL desde el **Meta Quest Browser** y pulsa **Enter VR**.
 
 ---
 
