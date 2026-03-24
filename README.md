@@ -104,7 +104,7 @@ Abre la carpeta del reto que quieras, edita el `index.html` y súbelo a tu hosti
 
 ## 📄 Licencia
 
-MIT — úsalo, modifícalo y compártelo libremente.
+APACHE 2.0
 
 ---
 
