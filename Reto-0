@@ -7,12 +7,37 @@
   </head>
   <body>
 
+    <!--
+      a-scene  →  el contenedor de todo el mundo 3D
+                  todo lo que pongas dentro aparece en la escena
+                  A-Frame añade automáticamente el botón "Enter VR"
+    -->
     <a-scene>
 
-      <!-- Una caja azul delante de ti, a la altura de los ojos -->
+      <!--
+        CAJA — el primer objeto en el espacio
+        ──────────────────────────────────────
+        position="0 1.5 -3"
+          x = 0   →  en el centro (ni izquierda ni derecha)
+          y = 1.5 →  a la altura de los ojos
+          z = -3  →  3 metros delante de ti
+                     z negativo = delante, z positivo = detrás
+
+        color  →  color en hexadecimal, igual que en CSS
+      -->
       <a-box position="0 1.5 -3" color="#4CC3D9"></a-box>
 
-      <!-- El suelo -->
+      <!--
+        SUELO — un plano horizontal grande
+        ────────────────────────────────────
+        position="0 0 0"  →  en el origen, a ras del suelo
+
+        rotation="-90 0 0"
+          los planos son verticales por defecto (como una pared)
+          rotamos -90 grados en X para tumbarlo horizontalmente
+
+        width / height  →  tamaño del suelo en metros
+      -->
       <a-plane
         position="0 0 0"
         rotation="-90 0 0"
@@ -21,7 +46,12 @@
         color="#3a3a4a">
       </a-plane>
 
-      <!-- El cielo -->
+      <!--
+        CIELO — esfera gigante que rodea toda la escena
+        ─────────────────────────────────────────────────
+        color  →  el color del fondo
+                  cambia este valor para probar distintos ambientes
+      -->
       <a-sky color="#1a1a2e"></a-sky>
 
     </a-scene>
