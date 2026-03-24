@@ -44,7 +44,7 @@ Entender el sistema de coordenadas X Y Z y colocar objetos en el espacio. Cajas,
 ### ✅ Reto 2 — Hacer que algo se mueva
 Animar objetos con el componente `animation`. Girar, flotar, pulsar. Sin una sola línea de JavaScript.
 
-📁 [`reto-02-animaciones/`](./reto-02-animaciones/)
+📁 [`reto-02-animaciones/`](Reto-2)
 
 ---
 
