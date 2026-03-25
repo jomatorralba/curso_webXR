@@ -99,10 +99,10 @@ Animar objetos con el componente `animation`. Girar, flotar, pulsar. Sin una sol
 
 ---
 
-### 🔜 Reto 3 — Mirar algo para activarlo
+### ✅ Reto 3 — Mirar algo para activarlo
 Interacción por mirada (gaze). Detectar que el usuario mira un objeto y usarlo como disparador.
 
-📁 [`reto-03-gaze/`] (Reto-3)
+📁 [`reto-03-gaze/`](Reto-3)
 
 ---
 
