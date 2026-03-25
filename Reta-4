@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reto 4 — Controladores</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+    <!--
+      a-scene  →  el contenedor de todo el mundo 3D
+                  A-Frame añade automáticamente el botón "Enter VR"
+    -->
+    <a-scene>
+
+      <!--
+        CONTROLADORES DE LAS QUEST
+        ───────────────────────────
+        En el Reto 3 usábamos la mirada para interactuar.
+        Aquí usamos los mandos físicos de las gafas.
+
+        Cada mando se declara como un elemento independiente:
+          hand="left"   →  mando izquierdo
+          hand="right"  →  mando derecho
+
+        a-laser-controls
+          dibuja un rayo láser que sale del mando
+          cuando el rayo toca un objeto y el usuario pulsa el gatillo,
+          se dispara el evento click — igual que en el Reto 3
+
+          hand="right"  →  qué mando emite el láser
+                           puedes tener uno en cada mano si quieres
+
+        a-oculus-touch-controls
+          activa el modelo visual del mando de Meta Quest en la escena
+          el usuario ve sus mandos representados en VR
+
+          hand="left"   →  mano izquierda (sin láser, solo visual)
+          hand="right"  →  mano derecha (con láser)
+      -->
+
+      <!-- Mano derecha: láser para interactuar -->
+      <a-entity
+        id="mano-derecha"
+        a-laser-controls="hand: right"
+        a-oculus-touch-controls="hand: right">
+      </a-entity>
+
+      <!-- Mano izquierda: solo visual, sin láser -->
+      <a-entity
+        id="mano-izquierda"
+        a-oculus-touch-controls="hand: left">
+      </a-entity>
+
+      <!--
+        CAJA — se activa con el láser del mando
+        ─────────────────────────────────────────
+        El sistema de eventos es exactamente igual que en el Reto 3.
+        La diferencia es que ahora el click lo dispara el gatillo
+        del mando en lugar de la mirada.
+
+        animation__hover
+          se activa cuando el láser apunta al objeto (mouseenter)
+          property: scale       →  el objeto crece al ser apuntado
+          to: 1.3 1.3 1.3       →  un 30% más grande
+          dur: 150              →  más rápido que en el Reto 3
+                                   los controladores dan respuesta más inmediata
+          startEvents: mouseenter
+
+        animation__restore
+          se activa cuando el láser deja de apuntar (mouseleave)
+          vuelve al tamaño original
+
+        event-set__click
+          cambia el color al pulsar el gatillo
+          _event: click
+          color: #4CC3D9
+      -->
+      <a-box
+        position="-2 1.5 -4"
+        color="#E24B4A"
+        animation__hover="
+          property: scale;
+          to: 1.3 1.3 1.3;
+          dur: 150;
+          startEvents: mouseenter"
+        animation__restore="
+          property: scale;
+          to: 1 1 1;
+          dur: 150;
+          startEvents: mouseleave"
+        event-set__click="
+          _event: click;
+          color: #4CC3D9">
+      </a-box>
+
+      <!--
+        ESFERA — mismo patrón, distinto color de activación
+        ──────────────────────────────────────────────────────
+        Apunta con el láser y pulsa el gatillo para activarla.
+      -->
+      <a-sphere
+        position="0 1.5 -4"
+        radius="0.6"
+        color="#EF9F27"
+        animation__hover="
+          property: scale;
+          to: 1.3 1.3 1.3;
+          dur: 150;
+          startEvents: mouseenter"
+        animation__restore="
+          property: scale;
+          to: 1 1 1;
+          dur: 150;
+          startEvents: mouseleave"
+        event-set__click="
+          _event: click;
+          color: #1D9E75">
+      </a-sphere>
+
+      <!--
+        CILINDRO — mismo patrón
+        ────────────────────────
+        Fíjate que el código de interacción es idéntico al Reto 3.
+        Solo cambia cómo se dispara el click:
+          Reto 3  →  mirando durante 1.5 segundos
+          Reto 4  →  apuntando con el láser y pulsando el gatillo
+      -->
+      <a-cylinder
+        position="2 1 -4"
+        radius="0.4"
+        height="2"
+        color="#4CC3D9"
+        animation__hover="
+          property: scale;
+          to: 1.3 1.3 1.3;
+          dur: 150;
+          startEvents: mouseenter"
+        animation__restore="
+          property: scale;
+          to: 1 1 1;
+          dur: 150;
+          startEvents: mouseleave"
+        event-set__click="
+          _event: click;
+          color: #E24B4A">
+      </a-cylinder>
+
+      <!--
+        SUELO — plano horizontal estático
+        ────────────────────────────────────
+        rotation="-90 0 0"  →  tumbado horizontalmente
+      -->
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        color="#3a3a4a">
+      </a-plane>
+
+      <!--
+        CIELO — fondo de la escena
+        ───────────────────────────
+        color  →  cambia este valor para probar distintos ambientes
+      -->
+      <a-sky color="#1a1a2e"></a-sky>
+
+    </a-scene>
+
+  </body>
+</html>
