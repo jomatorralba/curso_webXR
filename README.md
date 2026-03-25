@@ -116,6 +116,37 @@ Laser pointer y detección de botones con los mandos de las Quest.
 ### 🔜 Reto 5 — Cargar un modelo 3D
 Importar modelos GLB/GLTF en la escena. Dónde encontrarlos gratis y cómo ajustarlos.
 
+# ⚠️ Antes de empezar — servidor local
+
+Descarga los modelos en la misma carpeta donde tengas el .html
+
+A partir del **Reto 5** necesitas arrancar un servidor local
+para probar los archivos en tu ordenador.
+
+El navegador bloquea la carga de archivos 3D (GLB) cuando
+abres el HTML directamente desde tu carpeta. Es una restricción
+de seguridad de todos los navegadores modernos.
+
+## Cómo arrancar el servidor (Mac y Linux)
+
+1. Abre la Terminal
+2. Navega a la carpeta del reto:
+   cd ~/Desktop/reto-05 (o la carpeta en que lo tengas)
+3. Arranca el servidor:
+   python3 -m http.server 8000
+4. Abre en el navegador:
+   http://localhost:8000
+
+## En Windows
+
+python -m http.server 8000
+
+## Cuando lo subas a un servidor
+
+Esto solo es necesario en local. Cuando subas los
+archivos a Hostinger o GitHub Pages el servidor
+externo lo gestiona solo y no necesitas hacer nada.
+
 📁 `reto-05-modelos/` *(próximamente)*
 
 ---
