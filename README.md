@@ -149,7 +149,7 @@ Esto solo es necesario en local. Cuando subas los
 archivos a Hostinger o GitHub Pages el servidor
 externo lo gestiona solo y no necesitas hacer nada.
 
-📁 `reto-05-modelos/` *(próximamente)*
+📁 [`reto-05-modelos/`](Reto-5)
 
 ---
 
