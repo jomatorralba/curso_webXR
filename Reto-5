@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reto 5 — Modelo 3D</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+    <!--
+      a-scene  →  el contenedor de todo el mundo 3D
+                  A-Frame añade automáticamente el botón "Enter VR"
+    -->
+    <a-scene>
+
+      <!--
+        MODELO 3D
+        ──────────
+        gltf-model="modelo.glb"
+          carga el archivo GLB directamente por su nombre
+          el archivo tiene que estar en la misma carpeta que el index.html
+
+          ⚠️ IMPORTANTE: los archivos GLB no se pueden cargar abriendo
+          el index.html directamente desde el Finder (doble clic).
+          El navegador lo bloquea por seguridad.
+          Necesitas arrancar un servidor local antes de probarlo:
+
+            1. Abre la Terminal
+            2. Navega a la carpeta del reto:
+               cd ~/Desktop/reto-05
+            3. Arranca el servidor:
+               python3 -m http.server 8000
+            4. Abre en el navegador:
+               http://localhost:8000
+
+          Cuando lo subas a Hostinger o GitHub Pages esto ya no es necesario,
+          el servidor externo se encarga de servirlo correctamente.
+
+        position="0 1.5 -3"
+          x = 0   →  centrado
+          y = 1.5 →  a la altura de los ojos
+          z = -3  →  3 metros delante de ti
+
+        scale="1 1 1"
+          los modelos descargados tienen tamaños muy distintos
+          si aparece enorme  → prueba scale="0.1 0.1 0.1"
+          si aparece pequeño → prueba scale="5 5 5"
+          los tres números iguales para no deformar el modelo
+      -->
+      <a-entity
+        gltf-model="modelo.glb"
+        position="0 1.5 -3"
+        scale="1 1 1">
+      </a-entity>
+
+      <!--
+        CÁMARA
+        ───────
+        position="0 1.6 0"
+          altura estándar de una persona de pie (1.6 metros)
+          si no declaras la cámara, A-Frame la pone en 0 0 0 (al ras del suelo)
+      -->
+      <a-camera position="0 1.6 0"></a-camera>
+
+      <!--
+        SUELO — plano horizontal estático
+        ────────────────────────────────────
+        rotation="-90 0 0"  →  tumbado horizontalmente
+      -->
+      <a-plane
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        color="#3a3a4a">
+      </a-plane>
+
+      <!--
+        CIELO — fondo de la escena
+        ───────────────────────────
+        color  →  cambia este valor para probar distintos ambientes
+      -->
+      <a-sky color="#1a1a2e"></a-sky>
+
+    </a-scene>
+  </body>
+</html>
