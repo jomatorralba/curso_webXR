@@ -116,7 +116,7 @@ Laser pointer y detección de botones con los mandos de las Quest.
 ### 🔜 Reto 5 — Cargar un modelo 3D
 Importar modelos GLB/GLTF en la escena. Dónde encontrarlos gratis y cómo ajustarlos.
 
-# ⚠️ Antes de empezar — servidor local
+### ⚠️ Antes de empezar — servidor local
 
 Descarga los modelos en la misma carpeta donde tengas el .html
 
