@@ -106,10 +106,10 @@ Interacción por mirada (gaze). Detectar que el usuario mira un objeto y usarlo 
 
 ---
 
-### 🔜 Reto 4 — Usar los controladores
+### ✅ Reto 4 — Usar los controladores
 Laser pointer y detección de botones con los mandos de las Quest.
 
-📁 `reto-04-controladores/` *(próximamente)*
+📁 [`reto-04-controladores/`](Reto-4)
 
 ---
 
