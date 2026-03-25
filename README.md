@@ -119,6 +119,8 @@ Importar modelos GLB/GLTF en la escena. Dónde encontrarlos gratis y cómo ajust
 ### ⚠️ Antes de empezar — servidor local
 
 Descarga los modelos en la misma carpeta donde tengas el .html
+y renombralo por modelo.glb
+-> modelos gratis (https://poly.pizza/)
 
 A partir del **Reto 5** necesitas arrancar un servidor local
 para probar los archivos en tu ordenador.
