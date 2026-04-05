@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reto 6 — Cancelación visual</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+    <!--
+      ══════════════════════════════════════════════════
+      RETO 6 — TAREA DE CANCELACIÓN VISUAL EN VR
+      ══════════════════════════════════════════════════
+
+      PARADIGMA NEUROPSICOLÓGICO:
+      El paciente aparece rodeado de figuras geométricas.
+      Debe identificar y cancelar SOLO las esferas rojas.
+      Al activarlas se vuelven grises — canceladas.
+      Los distractores no responden — el paciente debe ignorarlos.
+
+      VARIABLES COGNITIVAS QUE ENTRENA:
+        - Atención selectiva (seleccionar objetivo entre distractores)
+        - Rastreo visual en espacio 3D (búsqueda en 360°)
+        - Inhibición de respuesta (ignorar los distractores)
+
+      CÓMO ACTIVAR LOS ESTÍMULOS — igual que en los retos anteriores:
+        Reto 3 → mira una esfera roja 1.5 segundos → se cancela
+        Reto 4 → apunta con el láser y pulsa el gatillo → se cancela
+      Puedes combinar ambas formas en la misma sesión.
+
+      AJUSTE DE DIFICULTAD — cambia estas constantes en el <script>:
+        TOTAL_OBJETIVOS  →  menos objetivos = más difícil encontrarlos
+        TOTAL_DISTRACTOR →  más distractores = más carga atencional
+        DISTANCIA        →  más lejos = más esfuerzo de rastreo
+    -->
+
+    <a-scene>
+
+      <!--
+        CÁMARA CON CURSOR DE MIRADA
+        ────────────────────────────
+        Igual que en el Reto 3.
+        fuse="true"           →  activa la interacción por mirada
+        fuse-timeout="1500"   →  1.5 segundos mirando = click automático
+
+        position="0 1.6 0"   →  altura de pie
+        Cambia a "0 1.1 0"   →  si el paciente está sentado
+      -->
+      <a-camera position="0 1.6 0">
+        <a-cursor
+          fuse="true"
+          fuse-timeout="1500"
+          color="#ffffff"
+          position="0 0 -1">
+        </a-cursor>
+      </a-camera>
+
+      <!--
+        MANO DERECHA CON LÁSER
+        ───────────────────────
+        Igual que en el Reto 4.
+        Alternativa a la mirada para pacientes que usan controladores.
+        Comenta este bloque si solo quieres usar la mirada.
+      -->
+      <a-entity
+        id="mano-derecha"
+        hand-controls="hand: right">
+        <a-entity
+          position="0.02 0.04 -0.08"
+          rotation="-80 0 0"
+          raycaster="showLine: true; far: 10; objects: .estimulo; lineColor: white; lineOpacity: 0.75">
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        id="mano-izquierda"
+        hand-controls="hand: left">
+      </a-entity>
+
+      <!--
+        PANEL DE INFORMACIÓN
+        ──────────────────────
+        Flota delante del paciente, fuera del área de estímulos.
+        El script de abajo actualiza estos textos en tiempo real.
+
+        id="contador"    →  muestra cuántas esferas se han cancelado
+        id="instruccion" →  consigna inicial, desaparece al primer acierto
+        id="mensaje"     →  aparece al completar la tarea
+      -->
+      <a-text
+        id="contador"
+        value="Canceladas: 0 / 8"
+        position="-0.5 2.6 -2"
+        color="#ffffff"
+        width="3">
+      </a-text>
+
+      <a-text
+        id="instruccion"
+        value="Mira las ESFERAS ROJAS para cancelarlas"
+        position="-1.8 2.3 -2"
+        color="#EF9F27"
+        width="4">
+      </a-text>
+
+      <a-text
+        id="mensaje"
+        value=""
+        position="-0.8 2.0 -2"
+        color="#4CC3D9"
+        width="4">
+      </a-text>
+
+      <!-- Suelo y cielo -->
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="20" height="20"
+        color="#2a2a2a">
+      </a-plane>
+
+      <a-sky color="#111122"></a-sky>
+
+    </a-scene>
+
+    <!--
+      JAVASCRIPT — después de </a-scene>
+      ─────────────────────────────────────
+      Igual que en los retos anteriores:
+      el script va siempre DESPUÉS de la escena
+      para garantizar que todo está cargado.
+    -->
+    <script>
+
+      /*
+        PARÁMETROS DE LA TAREA
+        ──────────────────────
+        Cambia estos valores para ajustar la dificultad.
+      */
+      const TOTAL_OBJETIVOS    = 8;    // esferas rojas a cancelar
+      const TOTAL_DISTRACTOR   = 16;   // figuras distractoras
+      const DISTANCIA_MIN      = 1.5;  // metros mínimos al paciente
+      const DISTANCIA_MAX      = 3.5;  // metros máximos al paciente
+
+      const COLOR_OBJETIVO     = '#E24B4A'; // rojo  — el objetivo
+      const COLOR_CANCELADO    = '#888888'; // gris  — ya cancelada
+      const COLORES_DISTRACTOR = ['#4CC3D9', '#EF9F27', '#1D9E75', '#534AB7', '#FAC775'];
+      const FORMAS_DISTRACTOR  = ['a-box', 'a-cylinder', 'a-sphere'];
+
+      /*
+        GENERACIÓN DE ESTÍMULOS
+        ────────────────────────
+        Colocamos las figuras en una esfera alrededor del paciente
+        para que el rastreo visual ocurra en las tres dimensiones.
+        Los objetivos y distractores se mezclan aleatoriamente.
+      */
+      const scene = document.querySelector('a-scene');
+      let canceladas = 0;
+      const esferas = [];
+
+      // Mezcla aleatoria de objetivos y distractores
+      const tipos = [
+        ...Array(TOTAL_OBJETIVOS).fill('objetivo'),
+        ...Array(TOTAL_DISTRACTOR).fill('distractor')
+      ].sort(() => Math.random() - 0.5);
+
+      tipos.forEach(tipo => {
+
+        const esObjetivo = tipo === 'objetivo';
+
+        /*
+          Posición aleatoria en esfera alrededor del paciente.
+          theta → ángulo horizontal (dónde está izquierda/derecha)
+          phi   → ángulo vertical (evitamos los polos extremos)
+          r     → distancia al paciente
+        */
+        const theta = Math.random() * Math.PI * 2;
+        const phi   = (Math.random() * 0.6 + 0.2) * Math.PI;
+        const r     = DISTANCIA_MIN + Math.random() * (DISTANCIA_MAX - DISTANCIA_MIN);
+
+        const x = r * Math.sin(phi) * Math.cos(theta);
+        const y = r * Math.cos(phi) + 1.6;
+        const z = r * Math.sin(phi) * Math.sin(theta);
+
+        // Objetivo → esfera roja / Distractor → forma y color aleatorios
+        const forma = esObjetivo
+          ? 'a-sphere'
+          : FORMAS_DISTRACTOR[Math.floor(Math.random() * FORMAS_DISTRACTOR.length)];
+
+        const color = esObjetivo
+          ? COLOR_OBJETIVO
+          : COLORES_DISTRACTOR[Math.floor(Math.random() * COLORES_DISTRACTOR.length)];
+
+        const figura = document.createElement(forma);
+        figura.setAttribute('position', `${x.toFixed(2)} ${y.toFixed(2)} ${z.toFixed(2)}`);
+        figura.setAttribute('color', color);
+        figura.setAttribute('scale', '0.3 0.3 0.3');
+
+        /*
+          Clase 'estimulo' — necesaria para que el láser
+          del Reto 4 detecte los objetos correctamente.
+          El raycaster busca objetos con objects: .estimulo
+        */
+        figura.setAttribute('class', 'estimulo');
+
+        if (forma === 'a-sphere')   figura.setAttribute('radius', '1');
+        if (forma === 'a-cylinder') { figura.setAttribute('radius', '0.5'); figura.setAttribute('height', '1.5'); }
+        if (forma === 'a-box')      { figura.setAttribute('width', '1'); figura.setAttribute('height', '1'); figura.setAttribute('depth', '1'); }
+
+        figura.dataset.esObjetivo = esObjetivo;
+
+        /*
+          FLOTACIÓN SUAVE
+          ────────────────
+          Cada figura flota a su propio ritmo.
+          Entrena el rastreo dinámico — más difícil que estático.
+          Comenta este bloque para una versión estática más sencilla.
+        */
+        const dur = 1800 + Math.random() * 1200;
+        const amp = (0.05 + Math.random() * 0.05).toFixed(2);
+        figura.setAttribute('animation__flotar',
+          `property: position;
+           from: ${x.toFixed(2)} ${y.toFixed(2)} ${z.toFixed(2)};
+           to: ${x.toFixed(2)} ${(parseFloat(y) + parseFloat(amp)).toFixed(2)} ${z.toFixed(2)};
+           dur: ${dur};
+           loop: true;
+           dir: alternate;
+           easing: easeInOutSine`);
+
+        /*
+          ANIMACIÓN DE HOVER — igual que en Reto 3 y 4
+          ───────────────────────────────────────────────
+          Al apuntar: la figura crece para indicar que está activa.
+          Al dejar de apuntar: vuelve a su tamaño original.
+          Solo las esferas rojas responden al click.
+        */
+        figura.setAttribute('animation__hover',
+          'property: scale; to: 0.4 0.4 0.4; dur: 150; startEvents: mouseenter');
+        figura.setAttribute('animation__restore',
+          'property: scale; to: 0.3 0.3 0.3; dur: 150; startEvents: mouseleave');
+
+        /*
+          EVENTO CLICK
+          ─────────────
+          Solo actúa si es una esfera roja (objetivo).
+          Los distractores tienen el listener pero no hacen nada
+          — el paciente debe inhibir la respuesta ante ellos.
+        */
+        figura.addEventListener('click', function () {
+
+          if (!this.dataset.esObjetivo || this.dataset.esObjetivo === 'false') return;
+
+          // Marcamos como cancelada para evitar doble activación
+          this.dataset.esObjetivo = 'false';
+
+          // Feedback visual: se vuelve gris y se encoge
+          this.removeAttribute('animation__flotar');
+          this.setAttribute('color', COLOR_CANCELADO);
+          this.setAttribute('animation__cancelar',
+            'property: scale; to: 0.1 0.1 0.1; dur: 400; easing: easeInQuad');
+
+          // Actualizamos el contador
+          canceladas++;
+          document.querySelector('#contador')
+            .setAttribute('value', `Canceladas: ${canceladas} / ${TOTAL_OBJETIVOS}`);
+
+          // Ocultamos la instrucción tras el primer acierto
+          if (canceladas === 1) {
+            document.querySelector('#instruccion').setAttribute('value', '');
+          }
+
+          // Tarea completada
+          if (canceladas === TOTAL_OBJETIVOS) {
+            document.querySelector('#mensaje')
+              .setAttribute('value', '¡Tarea completada! Muy bien.');
+          }
+        });
+
+        if (esObjetivo) esferas.push(figura);
+        scene.appendChild(figura);
+      });
+
+    </script>
+
+  </body>
+</html>
