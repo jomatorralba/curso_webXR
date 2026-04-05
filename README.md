@@ -153,7 +153,7 @@ externo lo gestiona solo y no necesitas hacer nada.
 
 ---
 
-### 🔜 Reto 6 — Mini escena interactiva de cancelación visual
+### ✅ Reto 6 — Mini escena interactiva de cancelación visual
 Este es el reto final del curso. No aprendes una sola cosa nueva — **lo juntas todo**.
 
 Objetos generados con JavaScript, animaciones, interacción por mirada y por controladores, y un objetivo clínico real: una tarea de cancelación visual para entrenar la atención selectiva.
