@@ -153,10 +153,74 @@ externo lo gestiona solo y no necesitas hacer nada.
 
 ---
 
-### 🔜 Reto 6 — Mini escena interactiva
-Proyecto final. Una galería, un puzzle o un quiz en VR combinando todo lo aprendido.
+### 🔜 Reto 6 — Mini escena interactiva de cancelación visual
+Este es el reto final del curso. No aprendes una sola cosa nueva — **lo juntas todo**.
 
-📁 `reto-06-proyecto/` *(próximamente)*
+Objetos generados con JavaScript, animaciones, interacción por mirada y por controladores, y un objetivo clínico real: una tarea de cancelación visual para entrenar la atención selectiva.
+
+---
+
+## Qué hace esta escena
+
+El paciente aparece rodeado de **24 figuras geométricas** distribuidas en las tres dimensiones. Entre todas hay **8 esferas rojas** — el objetivo. El resto son distractores de distintas formas y colores.
+
+La tarea es sencilla: **encuentra y cancela todas las esferas rojas**. Al activarlas se vuelven grises. Los distractores no responden — hay que ignorarlos.
+
+---
+
+## Cómo se activan los estímulos
+
+Exactamente igual que aprendiste en los retos anteriores:
+
+- **Reto 3** — mira una esfera roja durante 1.5 segundos → se cancela sola
+- **Reto 4** — apunta con el láser y pulsa el gatillo → se cancela
+
+Puedes usar cualquiera de las dos formas, o combinarlas.
+
+---
+
+## Qué entrena esta tarea
+
+| Variable cognitiva | Mecanismo |
+|---|---|
+| Atención selectiva | Buscar el objetivo entre distractores |
+| Rastreo visual 3D | Buscar en 360° a tu alrededor |
+| Inhibición de respuesta | No activar los distractores |
+
+---
+
+## Cómo graduar la dificultad
+
+Al inicio del script hay cuatro constantes que puedes cambiar sin tocar nada más:
+
+```javascript
+const TOTAL_OBJETIVOS  = 8;    // menos objetivos = más difícil encontrarlos
+const TOTAL_DISTRACTOR = 16;   // más distractores = más carga atencional
+const DISTANCIA_MIN    = 1.5;  // más lejos = más esfuerzo de rastreo
+const DISTANCIA_MAX    = 3.5;
+```
+
+Para una versión más sencilla, comenta el bloque `animation__flotar` — los estímulos quedarán estáticos en lugar de flotar.
+
+---
+
+📁 [`reto-06-proyecto/`](Reto-6)
+
+---
+## Lo que has aprendido en el curso
+
+Llegando hasta aquí sabes:
+
+- Montar una escena WebXR que funciona directamente en el navegador de las Quest
+- Colocar y transformar objetos en el espacio 3D
+- Animar propiedades con el componente `animation`
+- Detectar la mirada del usuario con un cursor de gaze
+- Usar los controladores y el hand tracking para interactuar
+- Cargar modelos 3D en formato GLB
+- Generar objetos dinámicamente con JavaScript
+- Responder a eventos y actualizar la escena en tiempo real
+
+Eso es WebXR desde cero. A partir de aquí, el límite es lo que quieras construir.
 
 ---
 
