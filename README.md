@@ -97,13 +97,14 @@ Entender el sistema de coordenadas X Y Z y colocar objetos en el espacio. Cajas,
 Animar objetos con el componente `animation`. Girar, flotar, pulsar. Sin una sola línea de JavaScript.
 
 📁 [`reto-02-animaciones/`](Reto-2)
-
+🌏 (https://josemariatorralba.com/vr/Reto-2.html)
 ---
 
 ### ✅ Reto 3 — Mirar algo para activarlo
 Interacción por mirada (gaze). Detectar que el usuario mira un objeto y usarlo como disparador.
 
 📁 [`reto-03-gaze/`](Reto-3)
+🌏 (https://josemariatorralba.com/vr/Reto-3.html)
 
 ---
 
@@ -111,6 +112,7 @@ Interacción por mirada (gaze). Detectar que el usuario mira un objeto y usarlo 
 Laser pointer y detección de botones con los mandos de las Quest.
 
 📁 [`reto-04-controladores/`](Reto-4)
+🌏 (https://josemariatorralba.com/vr/reto4.html)
 
 ---
 
@@ -151,6 +153,7 @@ archivos a Hostinger o GitHub Pages el servidor
 externo lo gestiona solo y no necesitas hacer nada.
 
 📁 [`reto-05-modelos/`](Reto-5)
+🌏 (https://josemariatorralba.com/vr/index.html)
 
 ---
 
@@ -203,9 +206,8 @@ const DISTANCIA_MAX    = 3.5;
 
 Para una versión más sencilla, comenta el bloque `animation__flotar` — los estímulos quedarán estáticos en lugar de flotar.
 
----
-
 📁 [`reto-06-proyecto/`](Reto-6)
+🌏 (https://josemariatorralba.com/vr/reto6.html)
 
 ---
 ## Lo que has aprendido en el curso
