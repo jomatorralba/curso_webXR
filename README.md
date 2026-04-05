@@ -210,6 +210,11 @@ Para una versión más sencilla, comenta el bloque `animation__flotar` — los e
 🌏 (https://josemariatorralba.com/vr/reto6.html)
 
 ---
+## Video de los retos
+[![MIRA LOS 6 RETOS]<img width="1536" height="1024" alt="Curso WebXR en GitHub" src="https://github.com/user-attachments/assets/bdb6a66f-1c6f-4009-856c-38398574eb7f" />](https://youtube.com/shorts/AkYazqOmBYM?feature=share)
+
+
+---
 ## Lo que has aprendido en el curso
 
 Llegando hasta aquí sabes:
